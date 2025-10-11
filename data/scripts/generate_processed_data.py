@@ -10,6 +10,7 @@ PROCESSED_DIR.mkdir(exist_ok=True)
 INGREDIENTS_CSV = RAW_DIR / "iba-cocktails-ingredients-web.csv"
 COCKTAILS_CSV = RAW_DIR / "iba-cocktails-web.csv"
 CONVERSIONS_CSV = CONFIG_DIR / "unit-conversions.csv"
+STORED_UNITS_CSV = CONFIG_DIR / "stored-units.csv"
 
 
 def filter_columns(df, columns):
@@ -30,10 +31,16 @@ def merge_data(ingredients_df, cocktails_df):
     return pd.merge(ingredients_df, cocktails_df, on="name", how="inner")
 
 
-def prepare_units(merged_df, conversions_df):
+def prepare_units(merged_df, conversions_df, stored_units_df):
     units_df = pd.DataFrame({"unit": merged_df["unit"].dropna().unique()})
+    units_df = filterStoredUnits(units_df, stored_units_df)
     units_df = apply_unit_conversions(units_df, conversions_df)
     return units_df.to_dict(orient="records")
+
+def filterStoredUnits(units_df, stored_units_df):
+    filtered_df = units_df[units_df['unit'].isin(stored_units_df['unit'])]
+    return filtered_df
+
 
 def write_json(data, path):
     with open(path, "w") as f:
@@ -80,13 +87,15 @@ def main():
     ingredients_raw_df = pd.read_csv(INGREDIENTS_CSV)
     cocktails_raw_df = pd.read_csv(COCKTAILS_CSV)
     conversions_df = pd.read_csv(CONVERSIONS_CSV)
+    stored_units_df = pd.read_csv(STORED_UNITS_CSV)
+
 
     ingredients_df = filter_columns(ingredients_raw_df, ["name", "quantity", "unit", "ingredient"])
     cocktails_df = filter_columns(cocktails_raw_df, ["name", "method", "garnish"])
     
     merged_df = merge_data(ingredients_df, cocktails_df)
 
-    units = prepare_units(merged_df, conversions_df)
+    units = prepare_units(merged_df, conversions_df, stored_units_df)
     recipes = prepare_recipes(merged_df)
 
     write_json(units, PROCESSED_DIR / "units.json")
