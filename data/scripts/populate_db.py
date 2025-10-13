@@ -4,10 +4,12 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATA_DIR = Path("processed")
+DATA_DIR = BASE_DIR / "processed"
 UNITS_FILE = DATA_DIR / "units.json"
 RECIPES_FILE = DATA_DIR / "recipes.json"
+INGREDIENTS_FILE = DATA_DIR / "ingredients.json"
 
 
 def load_json(path):

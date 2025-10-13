@@ -2,9 +2,10 @@ import pandas as pd
 import json
 from pathlib import Path
 
-RAW_DIR = Path("raw")
-CONFIG_DIR = Path("config")
-PROCESSED_DIR = Path("processed")
+BASE_DIR = Path(__file__).resolve().parent.parent
+RAW_DIR = BASE_DIR / "raw"
+CONFIG_DIR = BASE_DIR / "config"
+PROCESSED_DIR = BASE_DIR / "processed"
 PROCESSED_DIR.mkdir(exist_ok=True)
 
 INGREDIENTS_CSV = RAW_DIR / "iba-cocktails-ingredients-web.csv"
