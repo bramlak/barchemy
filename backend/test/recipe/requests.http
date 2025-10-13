@@ -1,0 +1,80 @@
+### Get all recipes
+GET http://localhost:3000/api/recipe
+Accept: application/json
+
+###
+
+### Get mixable recipes by ingredients
+POST http://localhost:3000/api/recipe/mixable
+Content-Type: application/json
+
+[
+            {
+                "name": "Gold Rum",
+                "quantity": 45.0,
+                "unit": "ml",
+                "stored_unit": "ml"
+            },
+            {
+                "name": "Galliano",
+                "quantity": 15.0,
+                "unit": "ml",
+                "stored_unit": "ml"
+            },
+            {
+                "name": "Fresh Pineapple Juice",
+                "quantity": 60.0,
+                "unit": "ml",
+                "stored_unit": "ml"
+            },
+            {
+                "name": "Fresh Lime Juice",
+                "quantity": 0.62,
+                "unit": "dash",
+                "stored_unit": "ml"
+            },
+            {
+                "name": "Prosecco",
+                "quantity": 100.0,
+                "unit": "top up",
+                "stored_unit": "ml"
+            }
+        ]
+
+###
+
+### mix  recipe
+POST http://localhost:3000/api/recipe/mix
+Content-Type: application/json
+
+{
+    "name": "Barracuda",
+    "factor": 2,
+    "ingredients": [
+            {
+                "name": "Gold Rum",
+                "quantity": 40.0,
+                "unit": "ml"
+            },
+            {
+                "name": "Galliano",
+                "quantity": 15.0,
+                "unit": "ml"
+            },
+            {
+                "name": "Fresh Pineapple Juice",
+                "quantity": 60.0,
+                "unit": "ml"
+            },
+            {
+                "name": "Fresh Lime Juice",
+                "quantity": 1,
+                "unit": "dash"
+            },
+            {
+                "name": "Prosecco",
+                "quantity": 100.0,
+                "unit": "cup"
+            }
+        ]
+}
