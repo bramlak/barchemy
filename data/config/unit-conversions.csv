@@ -1,7 +1,7 @@
 unit,stored_unit,factor
 dash,ml,0.62
 teaspoon,ml,5.92
-drop,ml,0.05
+drops,ml,0.05
 shot,ml,44
 bar spoon,ml,4.93
 splash,ml,5.9
