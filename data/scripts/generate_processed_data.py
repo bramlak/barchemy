@@ -47,14 +47,48 @@ def write_json(data, path):
         json.dump(data, f, indent=4)
 
 
-def prepare_recipes(merged_df):
+def find_unit_by_unit_name(units, unit_name):
+    temporary_unit = {
+        "unit": unit_name,
+        "stored_unit": "ml",
+        "factor": 0
+    }
+    unit = next((unit for unit in units if unit["unit"] == unit_name), temporary_unit)
+
+    return unit
+
+def convert_ingredient_to_stored(ingredient, units):
+    name = ingredient["name"]
+    unit = find_unit_by_unit_name(units, ingredient["unit"])
+    stored_ingredient = {
+        "name": name,
+        "quantity": float(ingredient["quantity"]) * unit["factor"],
+        "unit": ingredient["unit"],
+        "stored_unit": unit["stored_unit"]
+    }
+    return stored_ingredient
+
+def parse_to_float(value):
+    try:
+        number = float(value)
+    except (ValueError, TypeError, KeyError):
+        number = 0
+    return number
+
+def prepare_recipes(merged_df, units):
     df = capitalize_column(merged_df, "ingredient")
     df = replace_nan_with_none(df)
 
     recipes = []
     for recipe_name, group in df.groupby("name"):
         ingredients = [
-            {"name": row["ingredient"], "quantity": row["quantity"], "unit": row["unit"]}
+            convert_ingredient_to_stored({
+            "name": row["ingredient"],
+            "quantity": parse_to_float(row["quantity"]),
+            "unit": row["unit"]
+            }, units)
+
+
             for _, row in group.iterrows()
         ]
         recipe_obj = {
@@ -94,9 +128,8 @@ def main():
     cocktails_df = filter_columns(cocktails_raw_df, ["name", "method", "garnish"])
     
     merged_df = merge_data(ingredients_df, cocktails_df)
-
     units = prepare_units(merged_df, conversions_df, stored_units_df)
-    recipes = prepare_recipes(merged_df)
+    recipes = prepare_recipes(merged_df, units)
 
     write_json(units, PROCESSED_DIR / "units.json")
     write_json(recipes, PROCESSED_DIR / "recipes.json")
