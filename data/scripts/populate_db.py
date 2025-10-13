@@ -31,7 +31,7 @@ def replace_collection(collection, data):
     collection.drop()
     if data:
         collection.insert_many(data)
-    print(f"{name} collection updated with {len(data)} documents.")
+    print(f"{collection.name} collection updated with {len(data)} documents.")
 
 
 def main():
