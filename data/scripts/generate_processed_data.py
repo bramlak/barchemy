@@ -2,9 +2,10 @@ import pandas as pd
 import json
 from pathlib import Path
 
-RAW_DIR = Path("raw")
-CONFIG_DIR = Path("config")
-PROCESSED_DIR = Path("processed")
+BASE_DIR = Path(__file__).resolve().parent.parent
+RAW_DIR = BASE_DIR / "raw"
+CONFIG_DIR = BASE_DIR / "config"
+PROCESSED_DIR = BASE_DIR / "processed"
 PROCESSED_DIR.mkdir(exist_ok=True)
 
 INGREDIENTS_CSV = RAW_DIR / "iba-cocktails-ingredients-web.csv"
@@ -47,14 +48,48 @@ def write_json(data, path):
         json.dump(data, f, indent=4)
 
 
-def prepare_recipes(merged_df):
+def find_unit_by_unit_name(units, unit_name):
+    temporary_unit = {
+        "unit": unit_name,
+        "stored_unit": "ml",
+        "factor": 0
+    }
+    unit = next((unit for unit in units if unit["unit"] == unit_name), temporary_unit)
+
+    return unit
+
+def convert_ingredient_to_stored(ingredient, units):
+    name = ingredient["name"]
+    unit = find_unit_by_unit_name(units, ingredient["unit"])
+    stored_ingredient = {
+        "name": name,
+        "quantity": float(ingredient["quantity"]) * unit["factor"],
+        "unit": ingredient["unit"],
+        "stored_unit": unit["stored_unit"]
+    }
+    return stored_ingredient
+
+def parse_to_float(value):
+    try:
+        number = float(value)
+    except (ValueError, TypeError, KeyError):
+        number = 0
+    return number
+
+def prepare_recipes(merged_df, units):
     df = capitalize_column(merged_df, "ingredient")
     df = replace_nan_with_none(df)
 
     recipes = []
     for recipe_name, group in df.groupby("name"):
         ingredients = [
-            {"name": row["ingredient"], "quantity": row["quantity"], "unit": row["unit"]}
+            convert_ingredient_to_stored({
+            "name": row["ingredient"],
+            "quantity": parse_to_float(row["quantity"]),
+            "unit": row["unit"]
+            }, units)
+
+
             for _, row in group.iterrows()
         ]
         recipe_obj = {
@@ -65,6 +100,21 @@ def prepare_recipes(merged_df):
         }
         recipes.append(recipe_obj)
     return recipes
+
+
+def prepare_ingredients(recipes_df):
+    ingredients_dict = {}
+
+    for recipe in recipes_df:
+        for ing in recipe.get('ingredients', []):
+            key = (ing['name'], ing['stored_unit'])
+            if key not in ingredients_dict:
+                ingredients_dict[key] = {'name': ing['name'], 'stored_unit': ing['stored_unit']}
+
+    return list(ingredients_dict.values())
+
+
+
 
 def apply_unit_conversions(df, conversions_df):
     df = df.copy()
@@ -94,12 +144,14 @@ def main():
     cocktails_df = filter_columns(cocktails_raw_df, ["name", "method", "garnish"])
     
     merged_df = merge_data(ingredients_df, cocktails_df)
-
     units = prepare_units(merged_df, conversions_df, stored_units_df)
-    recipes = prepare_recipes(merged_df)
+    recipes = prepare_recipes(merged_df, units)
+    ingredients = prepare_ingredients(recipes)
 
     write_json(units, PROCESSED_DIR / "units.json")
     write_json(recipes, PROCESSED_DIR / "recipes.json")
+    write_json(ingredients, PROCESSED_DIR / "ingredients.json")
+
 
 
 if __name__ == "__main__":
