@@ -41,11 +41,15 @@ def main():
 
     units_data = load_json(UNITS_FILE)
     recipes_data = load_json(RECIPES_FILE)
+    ingredients_data = load_json(INGREDIENTS_FILE)
 
     unit_collection = db["units"]
     recipes_collection = db["recipes"]
+    ingredients_collection = db["ingredients"]
+
     replace_collection(unit_collection, units_data)
     replace_collection(recipes_collection, recipes_data)
+    replace_collection(ingredients_collection, ingredients_data)
 
     print("MongoDB successfully populated!")
 

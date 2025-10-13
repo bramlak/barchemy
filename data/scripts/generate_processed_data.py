@@ -101,6 +101,21 @@ def prepare_recipes(merged_df, units):
         recipes.append(recipe_obj)
     return recipes
 
+
+def prepare_ingredients(recipes_df):
+    ingredients_dict = {}
+
+    for recipe in recipes_df:
+        for ing in recipe.get('ingredients', []):
+            key = (ing['name'], ing['stored_unit'])
+            if key not in ingredients_dict:
+                ingredients_dict[key] = {'name': ing['name'], 'stored_unit': ing['stored_unit']}
+
+    return list(ingredients_dict.values())
+
+
+
+
 def apply_unit_conversions(df, conversions_df):
     df = df.copy()
     conversions_map = conversions_df.set_index("unit").to_dict(orient="index")
@@ -131,9 +146,12 @@ def main():
     merged_df = merge_data(ingredients_df, cocktails_df)
     units = prepare_units(merged_df, conversions_df, stored_units_df)
     recipes = prepare_recipes(merged_df, units)
+    ingredients = prepare_ingredients(recipes)
 
     write_json(units, PROCESSED_DIR / "units.json")
     write_json(recipes, PROCESSED_DIR / "recipes.json")
+    write_json(ingredients, PROCESSED_DIR / "ingredients.json")
+
 
 
 if __name__ == "__main__":
