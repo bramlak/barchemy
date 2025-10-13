@@ -39,3 +39,4 @@ terraform.rc
 venv/
 data/processed/
 .env
+*/node_modules/
