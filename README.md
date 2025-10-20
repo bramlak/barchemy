@@ -3,7 +3,7 @@
 [![Codecool](https://img.shields.io/badge/-Codecool-black.svg?logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMy42IDMzLjYxIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzAwMWRmZjt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03LjI3LDkuNzJhNy41MSw3LjUxLDAsMCwxLC44LTMuNDIsNS42Nyw1LjY3LDAsMCwxLDEtMS4zOSw0NC4wOSw0NC4wOSwwLDAsMSwzLjUzLTMuNDRBNi41OSw2LjU5LDAsMCwxLDE3LjI4LDBhNi44Miw2LjgyLDAsMCwxLDMuODEsMS41M2MuMTYuMTQuMzMuMjguNDguNDRMMjUuMyw1LjcybDAsMHMwLDAsMCwwLDAsMCwwLDBoMGE3LjY3LDcuNjcsMCwwLDAtNCwwLDcuNTgsNy41OCwwLDAsMC0zLjQ0LDJsLTcuNzIsNy43MS0xLTFBNi43OCw2Ljc4LDAsMCwxLDcuMjcsOS43MloiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMy44OCw3LjMxYTcuMzgsNy4zOCwwLDAsMSwzLjQyLjgsNS42Nyw1LjY3LDAsMCwxLDEuMzksMSw0NC4wOSw0NC4wOSwwLDAsMSwzLjQ0LDMuNTMsNi41OSw2LjU5LDAsMCwxLDEuNDUsNC42OSw2LjgyLDYuODIsMCwwLDEtMS41MywzLjgxYy0uMTQuMTYtLjI4LjMyLS40NC40OGwtMy43MywzLjczLDAsMGgwczAsMCwwLDAsMCwwLDAsMGE3Ljc4LDcuNzgsMCwwLDAsMC00LDcuODgsNy44OCwwLDAsMC0yLTMuNDRsLTcuNzItNy43MSwxLTEuMDVhNi43OCw2Ljc4LDAsMCwxLDQuNzktMS43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNi4zMywyMy44OWE3LjQxLDcuNDEsMCwwLDEtLjgsMy40Miw1LjQ0LDUuNDQsMCwwLDEtMSwxLjM4QTQyLjU2LDQyLjU2LDAsMCwxLDIxLDMyLjE0YTYuNjMsNi42MywwLDAsMS00LjY5LDEuNDUsNi44Miw2LjgyLDAsMCwxLTMuODEtMS41M2MtLjE2LS4xNC0uMzMtLjI4LS40OC0uNDRMOC4zLDI3Ljg5czAsMCwwLDAsMCwwLDAsMGwwLDBoMGE3LjcyLDcuNzIsMCwwLDAsNy40Mi0ybDcuNzEtNy43MiwxLjA1LDEuMDVhNi43OCw2Ljc4LDAsMCwxLDEuNzksNC43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik05LjcyLDI2LjI5QTcuMzcsNy4zNywwLDAsMSw2LjMsMjUuNWE1LjY3LDUuNjcsMCwwLDEtMS4zOS0xQTQ0LjA5LDQ0LjA5LDAsMCwxLDEuNDcsMjEsNi41OSw2LjU5LDAsMCwxLDAsMTYuMjlhNi44Miw2LjgyLDAsMCwxLDEuNTMtMy44MWMuMTQtLjE2LjI4LS4zMy40NC0uNDhMNS43Miw4LjI3bDAsMGgwczAsMCwwLDBhMCwwLDAsMCwxLDAsMCw3Ljc1LDcuNzUsMCwwLDAsMiw3LjQybDcuNzEsNy43Mi0xLDEuMDVhNi43Miw2LjcyLDAsMCwxLTQuNzksMS43OFoiLz48L2c+PC9nPjwvc3ZnPg==)](https://www.codecool.com/)
 
 <div align="center">
-      <img src="./resources/mern-stack-icon-1.png" alt="Logo" width="150" height="auto">
+      <img src="./resources/barchemy.svg" alt="Logo" width="150" height="auto">
 </div>
 
 A fullstack MERN application for managing your home bar inventory, exploring classic and modern cocktail recipes.
@@ -30,16 +30,20 @@ Data comes from the International Bartenders Association (IBA) official cocktail
 
 This is a MERN stack application. Backend uses Express.js with modular structure. Frontend built with React, frontend routing and Tailwind CSS. Data processing scripts prepare and populate the MongoDB database.
 
+<div align="center">
+      <img src="./resources/mern-stack-icon-1.png" alt="Logo" width="80" height="auto">
+</div>
+
 ## Tech Stack
 
 | Category  | Technologies |
 | --- | --- |
-| **Frontend** | [![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/) |
+| **Frontend** | [![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)|
 | **Backend** | [![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)](https://expressjs.com/) |
 | **Database** | [![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white)](https://www.mongodb.com/) |
-| **Containerization** | [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/) |
-| **CI/CD** |  [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions) |
-| **Cloud Infrastructure** | [![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/) [![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/) |
+| **Containerization** (in progress)| [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/) |
+| **CI/CD** (in progress)|  [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions) |
+| **Cloud Infrastructure** (in progress) | [![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/) [![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/) |
 
 
 ## Prerequisites
