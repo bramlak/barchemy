@@ -137,7 +137,6 @@ For API usage, backend runs at `http://localhost:3000`. Endpoints include `/ingr
   - Components: Inventory, Recipe filters, etc.
   - API: Hooks for data fetching.
 - **infrastructure/**: Planned for Terraform and ECS.
-- **CI/CD**: Planned for Github action
 
 ## Future Plans
 
