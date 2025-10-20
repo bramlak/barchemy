@@ -32,12 +32,15 @@ This is a MERN stack application. Backend uses Express.js with modular structure
 
 ## Tech Stack
 
-| Category | Technologies |
-|----------|--------------|
-| Backend | <a href="https://www.mongodb.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" alt="MongoDB" width="100"></a> <a href="https://expressjs.com/"><img src="https://raw.githubusercontent.com/expressjs/express/master/logo.svg" alt="Express.js" width="100"></a> <a href="https://nodejs.org/"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" width="100"></a> |
-| Frontend | <a href="https://react.dev/"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="100"></a> <a href="https://tailwindcss.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind CSS" width="100"></a> |
-| Data Processing | <a href="https://www.python.org/"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" width="100"></a> |
-| Future Infrastructure | <a href="https://www.terraform.io/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Terraform_Logo.svg" alt="Terraform" width="100"></a> <a href="https://aws.amazon.com/ecs/"><img src="https://www.svgrepo.com/show/448716/amazon-ecs.svg" alt="Amazon ECS" width="100"></a> <a href="https://github.com/features/actions"><img src="https://www.svgrepo.com/show/330509/githubactions.svg" alt="GitHub Actions" width="100"></a> |
+| Category  | Technologies |
+| --- | --- |
+| **Frontend** | [![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/) |
+| **Backend** | [![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)](https://expressjs.com/) |
+| **Database** | [![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white)](https://www.mongodb.com/) |
+| **Containerization** | [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/) [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/) |
+| **CI/CD** |  [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions) |
+| **Cloud Infrastructure** | [![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/) [![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/) |
+
 
 ## Prerequisites
 
