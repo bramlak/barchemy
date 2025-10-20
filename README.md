@@ -1,6 +1,5 @@
 # Barchemy
 
-[![MERN Stack](https://img.shields.io/badge/MERN-Stack-000000?style=for-the-badge&logo=mongodb&logoColor=green&logoWidth=20&logoHeight=20)](https://www.mongodb.com/mern-stack)
 <div align="center">
       <img src="./resources/mern-stack-icon-1.png" alt="Logo" width="150" height="auto">
 </div>
