@@ -82,9 +82,9 @@ export const getAllRecipes = async () => {
   return recipes;
 };
 
-export const getMixableRecipesByIngredients = async (ingredients) => {
-  const storedRecipes = await recipeRepository.findMixableByIngredients(ingredients);
-  const recipes = convertStoredRecipesToRecipes(storedRecipes);
+export const getMixableRecipesByIngredientsAndQuery = async (ingredients, query) => {
+  const storedRecipes = await recipeRepository.findMixableByIngredientsAndQuery(ingredients, query);
+  const recipes = await convertStoredRecipesToRecipes(storedRecipes);
   return recipes;
 };
 

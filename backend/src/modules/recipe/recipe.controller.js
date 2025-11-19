@@ -9,10 +9,11 @@ export const getAllRecipes = async (req, res, next) => {
   }
 };
 
-export const getMixableRecipesByIngredients = async (req, res, next) => {
+export const getMixableRecipesByIngredientsAndQuery = async (req, res, next) => {
   try {
-    const ingredients = req.body;
-    const recipes = await recipeService.getMixableRecipesByIngredients(ingredients);
+    const query = req.query.q
+    const ingredients = Array.isArray(req.body) ? req.body : [];
+    const recipes = await recipeService.getMixableRecipesByIngredientsAndQuery(ingredients, query);
     res.status(200).json(recipes);
   } catch (err) {
     next(err);
