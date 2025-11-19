@@ -21,7 +21,17 @@ export const getMixableRecipesByIngredientsAndQuery = async (req, res, next) => 
 };
 
 
-export const mixRecipe = async (req, res, next) => {
+export const areRecipesMixableByIngredients = async (req, res, next) => {
+  try {
+    const data = req.body;
+    const areMixable = await recipeService.areRecipesMixableByIngredients(data.ingredients, data.recipes);
+    res.status(200).json(areMixable);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
   try {
     const recipe = req.body;
     const storedIngredientChanges = await recipeService.mixRecipe(recipe);
