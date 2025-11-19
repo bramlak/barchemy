@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { API_BASE_URL, handleResponse } from '../utils';
+import { handleResponse } from '../utils';
 
 export function useIngredients() {
   const [ingredients, setIngredients] = useState([]);

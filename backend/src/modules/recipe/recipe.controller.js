@@ -9,10 +9,11 @@ export const getAllRecipes = async (req, res, next) => {
   }
 };
 
-export const getMixableRecipesByIngredients = async (req, res, next) => {
+export const getMixableRecipesByIngredientsAndQuery = async (req, res, next) => {
   try {
-    const ingredients = req.body;
-    const recipes = await recipeService.getMixableRecipesByIngredients(ingredients);
+    const query = req.query.q
+    const ingredients = Array.isArray(req.body) ? req.body : [];
+    const recipes = await recipeService.getMixableRecipesByIngredientsAndQuery(ingredients, query);
     res.status(200).json(recipes);
   } catch (err) {
     next(err);
@@ -20,11 +21,22 @@ export const getMixableRecipesByIngredients = async (req, res, next) => {
 };
 
 
-export const mixRecipe = async (req, res, next) => {
+export const areRecipesMixableByIngredients = async (req, res, next) => {
   try {
-    const recipe = req.body;
-    const storedIngredientChanges = await recipeService.mixRecipe(recipe);
-    res.status(200).json(storedIngredientChanges);
+    const data = req.body;
+    const areMixable = await recipeService.areRecipesMixableByIngredients(data.ingredients, data.recipes);
+    res.status(200).json(areMixable);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+export const mixRecipes = async (req, res, next) => {
+  try {
+    const recipes = req.body;
+    const storedChangesOfIngredients = await recipeService.mixRecipes(recipes);
+    res.status(200).json(storedChangesOfIngredients);
   } catch (err) {
     next(err);
   }

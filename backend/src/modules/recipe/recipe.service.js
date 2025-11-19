@@ -1,8 +1,10 @@
 import * as recipeRepository from './recipe.repository.js';
 import * as unitService from '../unit/unit.service.js';
+import * as ingredientService from '../ingredient/ingredient.service.js';
 
 const convertStoredIngredientToIngredient = async (storedIngredient) => {
-  const factor = await unitService.getFactorByUnit(storedIngredient.unit);
+  const storedUnit = await ingredientService.getStoredUnitByName(storedIngredient.name);
+  const factor = await unitService.getFactorByUnit(storedUnit);
   const quantity = storedIngredient.quantity / factor;
   const ingredient = {
     name: storedIngredient.name,
@@ -18,7 +20,7 @@ const convertIngredientToStoredIngredient = async (ingredient) => {
   const quantity = ingredient.quantity * factor;
   const storedIngredient = {
     name: ingredient.name,
-    stored_unit: stored_unit,
+    storedUnit: stored_unit,
     quantity: quantity
   }
   return storedIngredient;
@@ -32,14 +34,29 @@ const convertStoredRecipeToRecipe = async (storedRecipe) => {
   );
 
   const recipe = {
-    name: storedRecipe.name,
-    garnish: storedRecipe.garnish,
-    method: storedRecipe.method,
+    ...storedRecipe,
     ingredients: ingredients
   };
 
   return recipe;
 };
+
+
+const convertRecipeToStoredRecipe = async (recipe) => {
+  const storedIngredients = await Promise.all(
+    recipe.ingredients.map(async ingredient =>  {
+      return await convertStoredIngredientToIngredient(ingredient);
+    })
+  );
+
+  const storedRecipe = {
+    ...recipe,
+    ingredients: storedIngredients
+  };
+
+  return storedRecipe;
+};
+
 
 const convertStoredRecipesToRecipes = async (storedRecipes) => {
   const recipes = await Promise.all(
@@ -50,13 +67,22 @@ const convertStoredRecipesToRecipes = async (storedRecipes) => {
   return recipes;
 };
 
+const convertRecipesToStoredRecipes = async (recipes) => {
+  const storedRecipes = await Promise.all(
+    recipes.map(async recipe => {
+      return await convertRecipeToStoredRecipe(recipe);
+    })
+  );
+  return recipes;
+};
 
-const calculateStoredIngredientChanges = (storedIngredients, factor) => {
+
+const calculateStoredIngredientChanges = (storedIngredients, quantity) => {
     const ingredientChanges = storedIngredients.map(storedIngredient => {
       return {
         name: storedIngredient.name,
         stored_unit: storedIngredient.stored_unit,
-        quantity: storedIngredient.quantity * factor
+        quantity: storedIngredient.quantity * quantity
       };
     }); 
   return ingredientChanges;
@@ -82,19 +108,56 @@ export const getAllRecipes = async () => {
   return recipes;
 };
 
-export const getMixableRecipesByIngredients = async (ingredients) => {
-  const storedRecipes = await recipeRepository.findMixableByIngredients(ingredients);
-  const recipes = convertStoredRecipesToRecipes(storedRecipes);
+export const getMixableRecipesByIngredientsAndQuery = async (ingredients, query) => {
+  const storedRecipes = await recipeRepository.findMixableByIngredientsAndQuery(ingredients, query);
+  const recipes = await convertStoredRecipesToRecipes(storedRecipes);
   return recipes;
 };
 
 
-export const mixRecipe = async (recipe) => {
-  const name = recipe.name;
-  if (!name) throw new Error('Recipe name is required');
-  const factor = recipe.factor ?? 1;
-  const ingredients = recipe.ingredients;
-  const storedIngredients = await convertIngredientsToStoredIngredients(ingredients);
-  const storedIngredientChanges = calculateStoredIngredientChanges(storedIngredients, factor);
-  return storedIngredientChanges;
+const sumIngredientsOfRecipes = (recipes) => {
+  const map = recipes.reduce((map, recipe) => {
+    recipe.ingredients.forEach(ingredient => {
+      const quantity = ingredient.quantity * recipe.quantity;
+      if (map.has(ingredient.name)) {
+        map.get(ingredient.name).quantity += quantity;
+      } else {
+        map.set(ingredient.name, { ...ingredient, quantity: quantity });
+      }
+    });
+    return map;
+  }, new Map());
+
+  return Array.from(map.values());
+};
+
+
+const getIngredientByName = (ingredients, name) => {
+  return ingredients.find(ingredient => ingredient.name === name); 
+}
+
+
+export const areRecipesMixableByIngredients = async (ingredients, recipes) => {
+  const storedRecipes = await convertRecipesToStoredRecipes(recipes);
+  const summedIngredients = sumIngredientsOfRecipes(storedRecipes);
+
+  const areMixable = summedIngredients.every(summedIngredient => {
+    const foundIngredient = getIngredientByName(ingredients, summedIngredient.name)
+    if (!foundIngredient){
+      return false;
+    } else if (summedIngredient.quantity <= foundIngredient.quantity) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return areMixable;
+};
+
+
+
+export const mixRecipes = async (recipes) => {
+  const storedRecipes = await convertRecipesToStoredRecipes(recipes);
+  const summedIngredients = sumIngredientsOfRecipes(storedRecipes);
+  return summedIngredients;
 };
