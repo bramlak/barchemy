@@ -6,5 +6,6 @@ const router = Router();
 router.get('/', recipeController.getAllRecipes);
 router.post('/mixable', recipeController.getMixableRecipesByIngredientsAndQuery);
 router.post('/areMixable', recipeController.areRecipesMixableByIngredients);
+router.post('/mix', recipeController.mixRecipes);
 
 export default router;

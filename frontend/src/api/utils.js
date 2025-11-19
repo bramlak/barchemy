@@ -65,3 +65,13 @@ export async function fetchAreMixable(inventory, recipes) {
     throw new Error(error.message);
   }
 }
+
+
+export async function fetchMix(recipes) {
+  try {
+    const selectedRecipes = selectRecipes(recipes)
+    return fetchPost(`/api/recipe/mix`, selectedRecipes);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}

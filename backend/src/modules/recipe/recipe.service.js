@@ -153,4 +153,11 @@ export const areRecipesMixableByIngredients = async (ingredients, recipes) => {
   });
   return areMixable;
 };
+
+
+
+export const mixRecipes = async (recipes) => {
+  const storedRecipes = await convertRecipesToStoredRecipes(recipes);
+  const summedIngredients = sumIngredientsOfRecipes(storedRecipes);
+  return summedIngredients;
 };
