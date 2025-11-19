@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { API_BASE_URL, handleResponse } from '../utils';
+import { handleResponse } from '../utils';
 
 export function useMixRecipe() {
   const [changes, setChanges] = useState(null);
