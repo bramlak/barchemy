@@ -41,3 +41,4 @@ data/processed/
 .env
 */node_modules/
 node_modules/
+.vite
